@@ -8,7 +8,7 @@
 
 import sqlite3
 
-conn = sqlite3.connect('.\\etc\\database.db') # connects to 'database.db', if it doesn't exist it gets created
+conn = sqlite3.connect('.database.db') # connects to 'database.db', if it doesn't exist it gets created
 
 # Creating a table with 2 fields
 with conn: # opens database file
@@ -20,7 +20,7 @@ with conn: # opens database file
     conn.commit() # commits changes
 conn.close() # closes database file
 
-conn = sqlite3.connect('.\\etc\\database.db') # connecting again
+conn = sqlite3.connect('.database.db') # connecting again
 # File list for assignment, slightly modified but still contains the two .txt files
 fileList = ('information.docx','hello.txt','myImage.png', \
             'myMovie.mp4','world.txt','data.pdf','myPhoto.jpg')
