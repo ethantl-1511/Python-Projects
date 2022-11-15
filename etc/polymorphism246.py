@@ -13,6 +13,7 @@ class d4(dice):
     sides = 4
     otherName = "Prism" # New d4 attribute
 
+    # Changed method, added more to print
     def info(self):
         print("\nShape Name: {}\nShape Sides: {}\nOther name: {}".format(self.name,self.sides,self.otherName))
         return 
@@ -27,6 +28,7 @@ class circle(dice):
         print("\nShape Name: {}\nShape Radius: {}\nIs a circle a die? {}".format(self.name,self.radius, self.isDie))
         return
 
+# invoking methods
 is_dice = dice()
 is_dice.info()
 
