@@ -6,12 +6,12 @@ class computer:
     
 
 class windows(computer): # Denotes that windows is a child class of computer and will add the following attributes
-    os = 'Windows10'   # New windows-specific attribute
-    canModify = True
-    canInstall = True
+    os = 'Windows10'  # New attribute
+    canModify = True  # New windows-specific attribute
+    canInstall = True # New windows-specific attribute
     
 	
 class nintendoGC(computer): # nintendoGC is a child class of computer
-    os = 'Nintendo GameCube'
-    cd_drive = True
-    controller_input = True
+    os = 'Nintendo GameCube' # New attribute
+    cd_drive = True          # New nintendoGC-specific attribute
+    controller_input = True  # New nintendoGC-specific attribute
