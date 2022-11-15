@@ -4,7 +4,7 @@ class shape:
     sides = None
 
     def info(self):
-        msg = "\nShape Name: {}\nShape Sides: ".format(self.name,self.sides)
+        msg = "\nShape Name: {}\nShape Sides: {}".format(self.name,self.sides)
         return msg
 
 # child
