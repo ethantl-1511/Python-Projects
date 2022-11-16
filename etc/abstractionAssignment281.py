@@ -8,6 +8,7 @@ class Magic(ABC): # class Magic
     @abstractmethod 
     def letters(self,word):
         pass # pass arguments, which will come next
+
 class MoreMagic(Magic): # child class MoreMagic
     def letters(self,word): # this method will essentially be passed into the abstract method
         print("Did {} work?".format(word))
