@@ -17,23 +17,23 @@ format = "%H:%M:%S %Z%z"
 time = datetime.now(timezone('UTC'))
 
 portlandTime = time.astimezone(timezone('US/Pacific'))
-portlandHour = portlandTime.strftime("%H")
-if 9 <= int(portlandHour) <= 16:
+portlandHour = portlandTime.strftime("%H%M")
+if 900 <= int(portlandHour) <= 1700:
     print("Portland Branch Status: OPEN")
 else:
     print("Portland Branch Status: CLOSED")
 
 
 nycTime = time.astimezone(timezone('US/Eastern'))
-nycHour = nycTime.strftime("%H")
-if 9 <= int(nycHour) <= 16:
+nycHour = nycTime.strftime("%H%M")
+if 900 <= int(nycHour) <= 1700:
     print("New York City Branch Status: OPEN")
 else:
     print("New York City Branch Status: CLOSED")
 
 londonTime = time.astimezone(timezone('Europe/London'))
-londonHour = londonTime.strftime("%H")
-if 9 <= int(londonHour) <= 16:
+londonHour = londonTime.strftime("%H%M")
+if 900 <= int(londonHour) <= 1700:
     print("London Branch Status: OPEN")
 else:
     print("London Branch Status: CLOSED")
