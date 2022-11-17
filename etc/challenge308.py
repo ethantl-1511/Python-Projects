@@ -18,7 +18,7 @@ time = datetime.now(timezone('UTC'))
 
 portlandTime = time.astimezone(timezone('US/Pacific'))
 portlandHour = portlandTime.strftime("%H")
-if 9 <= int(portlandHour) <= 17:
+if 9 <= int(portlandHour) <= 16:
     print("Portland Branch Status: OPEN")
 else:
     print("Portland Branch Status: CLOSED")
@@ -26,14 +26,14 @@ else:
 
 nycTime = time.astimezone(timezone('US/Eastern'))
 nycHour = nycTime.strftime("%H")
-if 9 <= int(nycHour) <= 17:
+if 9 <= int(nycHour) <= 16:
     print("New York City Branch Status: OPEN")
 else:
     print("New York City Branch Status: CLOSED")
 
 londonTime = time.astimezone(timezone('Europe/London'))
 londonHour = londonTime.strftime("%H")
-if 9 <= int(londonHour) <= 17:
+if 9 <= int(londonHour) <= 16:
     print("London Branch Status: OPEN")
 else:
     print("London Branch Status: CLOSED")
