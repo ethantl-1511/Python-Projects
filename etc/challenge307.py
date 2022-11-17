@@ -2,13 +2,9 @@ thisArray1 = range(4) # Step 1
 thisArray2 = reversed(range(4)) # Step 2
 thisArray3 = reversed(range(2, 9, 2)) # Step 3
 
-for i in thisArray1:
-    print(i)
-print("\n")
+def arrayLoop(x,x,x):
+    for i in x:
+        print(i)
+    print("\n")
 
-for j in thisArray2:
-    print(j)
-print("\n")
-
-for k in thisArray3:
-   print(k)
+arrayLoop(thisArray1, thisArray2, thisArray3)

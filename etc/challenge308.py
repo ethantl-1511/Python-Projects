@@ -9,31 +9,28 @@
 #           The hours of both branches are 9:00 a.m.-5:00 p.m. 
 #           in their own time zone.
 
-from datetime import datetime
+# importing modules
+from datetime import datetime 
 from pytz import timezone
 
-format = "%H:%M:%S %Z%z"
+format = "%H:%M:%S %Z%z" # time format
+time = datetime.now(timezone('UTC')) # variable for base UTC time
 
-time = datetime.now(timezone('UTC'))
+portlandBranch = "Portland"
+portlandTime = time.astimezone(timezone('US/Pacific')) # timezone for Portland
+nycBranch = "New York City"
+nycTime = time.astimezone(timezone('US/Eastern')) # timezone for New York City
+londonBranch = "London"
+londonTime = time.astimezone(timezone('Europe/London')) # timezone for London
 
-portlandTime = time.astimezone(timezone('US/Pacific'))
-portlandHour = portlandTime.strftime("%H%M")
-if 900 <= int(portlandHour) <= 1700:
-    print("Portland Branch Status: OPEN")
-else:
-    print("Portland Branch Status: CLOSED")
+# function to check if branch is open or closed
+def isOpen(time,branch):
+    localHour = time.strftime("%H%M") # converting time to string
+    if 900 <= int(localHour) <= 1700: # if the 'time' is between 900 (9am) and 1700 (5pm),
+        print("{} Branch Status: OPEN".format(branch)) # print OPEN
+    else: # if 'time' is NOT between 9am-5pm,
+        print("{} Branch Status: CLOSED".format(branch)) # print CLOSE
 
-
-nycTime = time.astimezone(timezone('US/Eastern'))
-nycHour = nycTime.strftime("%H%M")
-if 900 <= int(nycHour) <= 1700:
-    print("New York City Branch Status: OPEN")
-else:
-    print("New York City Branch Status: CLOSED")
-
-londonTime = time.astimezone(timezone('Europe/London'))
-londonHour = londonTime.strftime("%H%M")
-if 900 <= int(londonHour) <= 1700:
-    print("London Branch Status: OPEN")
-else:
-    print("London Branch Status: CLOSED")
+isOpen(portlandTime, portlandBranch) # call function, pass portland parameters
+isOpen(nycTime, nycBranch) # call function, pass NYC parameters
+isOpen(londonTime, londonBranch) # call function, pass london parameters
