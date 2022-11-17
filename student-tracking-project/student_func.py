@@ -32,7 +32,7 @@ def first_run(self):
         cur = conn.cursor()
         cur, count = count_records(cur)
         if count < 1:
-            cur.execute("""INSERT INTO tbl_students (firstName,lastName,fullName,phone,email,course) VALUES (?,?,?,?,?,?)""", ('Ethan','LaRocca','Ethan LaRocca','111-111-1111','email@email.com','course000'))
+            cur.execute("""INSERT INTO tbl_students (firstName,lastName,fullName,phone,email,course) VALUES (?,?,?,?,?,?)""", ('fName','lName','fName lName','000-000-0000','email@email.com','course000'))
             conn.commit()
     conn.close()
 
