@@ -7,7 +7,7 @@
 
 <br>
 <h2>Student-Tracking Program</h2>
-<p>This project keeps a temporary database of student's information and what courses they attend at a school. A user can add a new student's name, number, email, and current course attending to the database, and also delete students from the database as needed. They can then see their entry in a large scrollable list.</p>
+<p>This project keeps a database of student's information and what courses they attend at a school. A user can add a new student's name, number, email, and current course attending to the database, and also delete students from the database as needed. They can then see their entry in a large scrollable list.</p>
 
 <h2>File-Transfer Program</h2>
 <p>This project program will check a chosen source directory and move all new files created within the last 24 hours to a chosen destination directory all with the click of a button!</p
