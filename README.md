@@ -15,5 +15,4 @@
 
 <h2>Django Projects</h2>
 <p>The first Django project involved creating an admin section of a Unviersity site that could be used to add Professors and other Campuses to a database.</p>
-<br>
 <p>The second Django project involved creating a site where you could create an account, input a deposit or withdrawl, and see account-related balances.</p>
