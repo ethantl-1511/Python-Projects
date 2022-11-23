@@ -1,4 +1,3 @@
-import os
 from tkinter import *
 from tkinter import messagebox
 import tkinter as tk
@@ -32,7 +31,7 @@ def first_run(self):
         cur = conn.cursor()
         cur, count = count_records(cur)
         if count < 1:
-            cur.execute("""INSERT INTO tbl_students (firstName,lastName,fullName,phone,email,course) VALUES (?,?,?,?,?,?)""", ('fName','lName','fName lName','000-000-0000','email@email.com','course000'))
+            cur.execute("""INSERT INTO tbl_students (firstName,lastName,fullName,phone,email,course) VALUES (?,?,?,?,?,?)""", ('Example','Student','Example Student','000-000-0000','email@email.com','course000'))
             conn.commit()
     conn.close()
 
@@ -42,7 +41,9 @@ def count_records(cur):
     count = cur.fetchone()[0]
     return cur,count
 
+# function to Select item in ListBox
 def onSelect(self,event):
+    # call event self.list1 widget
     varList1 = event.widget
     select = varList1.curselection()[0]
     value = varList1.get(select)
@@ -51,6 +52,7 @@ def onSelect(self,event):
         cursor = conn.cursor()
         cursor.execute("""SELECT firstName,lastName,phone,email,course FROM tbl_students WHERE fullname = (?)""", [value])
         varBody = cursor.fetchall()
+        # returns a tuple we can slice into 5 parts using data[] during iteration
         for data in varBody:
             self.textfirstName.delete(0,END)
             self.textfirstName.insert(0,data[0])
@@ -66,14 +68,16 @@ def onSelect(self,event):
 def onSubmit(self):
     var_firstName = self.textfirstName.get()
     var_lastName = self.textlastName.get()
-    var_firstName = var_firstName.strip()
-    var_lastName = var_lastName.strip()
+    # normalize data
+    var_firstName = var_firstName.strip() # remove any blanks before/after
+    var_lastName = var_lastName.strip() # remove any blanks before/after
     var_firstName = var_firstName.title()
     var_lastName = var_lastName.title()
-    var_fullName = ('{} {}'.format(var_firstName,var_lastName))
-    var_phone = self.textPhone.get().strip()
-    var_email = self.textEmail.get().strip()
-    var_course = self.textCourse.get().strip()
+    var_fullName = ('{} {}'.format(var_firstName,var_lastName)) # combine name
+    print("var_fullname: {}".format(var_fullName))
+    var_phone = self.textPhone.get().strip() # remove any blanks before/after 
+    var_email = self.textEmail.get().strip() # remove any blanks before/after
+    var_course = self.textCourse.get().strip() # remove any blanks before/after
     if not '@' or not '.' in var_email:
         print("Incorrect email format.")
     if (len(var_firstName) > 0) and (len(var_lastName) > 0) and (len(var_phone) > 0) and (len(var_email) > 0) and (len(var_course) > 0):
@@ -84,8 +88,9 @@ def onSubmit(self):
             count = cursor.fetchone()[0]
             checkName = count
             if checkName == 0:
+                print("checkName: {}".format(checkName))
                 cursor.execute("""INSERT INTO tbl_students (firstName,lastName,fullName,phone,email, course) VALUES (?,?,?,?,?,?)""",(var_firstName,var_lastName,var_fullName,var_phone,var_email,var_course))
-                self.list1.insert(END, var_fullName + "|" + var_phone + "|" + var_email + "|" + var_course)
+                self.list1.insert(END, var_fullName)
                 onClear(self)
             else:
                 messagebox.showerror("Name Error","'{}' already exists. Choose a different name.".format(var_fullName))
@@ -101,6 +106,7 @@ def onDelete(self):
     conn = sqlite3.connect('student-tracking.db')
     with conn:
         cur = conn.cursor()
+         # check count to ensure this is not the last record in the database
         cur.execute("""SELECT COUNT(*) FROM tbl_students""")
         count = cur.fetchone()[0]
         if count > 1:
@@ -112,9 +118,9 @@ def onDelete(self):
                     cursor.execute("""DELETE FROM tbl_students WHERE fullName = '{}'""".format(var_select))
                 onDeleted(self)
                 conn.commit()
-            else:
-                confirm = messagebox.showerror("Last Record Error","There must be one record in the database.\nCreate another record to delete ({}).".format(var_select))
-        conn.close()
+        else:
+            confirm = messagebox.showerror("Last Record Error","There must be one record in the database.\nCreate another record to delete ({}).".format(var_select))
+    conn.close()
     
 def onDeleted(self):
     self.textfirstName.delete(0,END)
@@ -136,6 +142,7 @@ def onClear(self):
     self.textCourse.delete(0,END)
 
 def onRefresh(self):
+
     self.list1.delete(0,END)
     conn = sqlite3.connect('student-tracking.db')
     with conn:
@@ -144,7 +151,7 @@ def onRefresh(self):
         count = cursor.fetchone()[0]
         i = 0
         while i < count:
-            cursor.execute("""SELECT fullName + phone + email + course FROM tbl_students""")
+            cursor.execute("""SELECT fullName FROM tbl_students""")
             varList1 = cursor.fetchall()[i]
             for item in varList1:
                 self.list1.insert(0,str(item))

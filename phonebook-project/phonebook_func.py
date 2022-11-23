@@ -44,13 +44,12 @@ def create_db(self):
     first_run(self)
 
 def first_run(self):
-    data = ('John','Doe','John Doe','111-111-1111','jdoe@gmail.com')
     conn = sqlite3.connect('phonebook.db')
     with conn:
         cur = conn.cursor()
         cur, count = count_records(cur)
         if count < 1:
-            cur.execute("""INSERT INTO tbl_phonebook (col_fname,col_lname,col_fullname,col_phone,col_email) VALUES (?,?,?,?,?)""", [data])
+            cur.execute("""INSERT INTO tbl_phonebook (col_fname,col_lname,col_fullname,col_phone,col_email) VALUES (?,?,?,?,?)""", ('John','Doe','John Doe','111-111-1111','jdoe@gmail.com'))
             conn.commit()
     conn.close()
 
@@ -175,47 +174,6 @@ def onRefresh(self):
                 self.lstList1.insert(0,str(item))
                 i = i + 1
     conn.close()
-
-def onUpdate(self):
-    try:
-        var_select = self.lstList1.curselection()[0] # index of list selection
-        var_value = self.lstList1.get(var_select) # list selection's value
-    except:
-        messagebox.showinfo("Missing selection","No name was selected from the list box. \nCancelling the Update request.")
-        return
-    # user will only be allowed to update changes for phone/email
-    # name changes need user to delete entire record and start over.
-    var_phone = self.txt_phone.get().strip() # normalize data
-    var_email = self.txt_email.get().strip()
-    if (len(var_phone) > 0) and (len(var_email) > 0): # ensure data is present
-        conn = sqlite3.connect('phonebook.db')
-        with conn:
-            cur = conn.cursor()
-            # count records to see if user changes are already in database
-            cur.execute("""SELECT COUNT(col_phone) FROM tbl_phonebook WHERE col_phone = '{}'""".format(var_phone))
-            count = cur.fetchone()[0]
-            print(count)
-            cur.execute("""SELECT COUNT(col_email) FROM tbl_phonebook WHERE col_email = '{}'""".format(var_email))
-            count2 = cur.fetchone()[0]
-            print(count2)
-            if count == 0 or count2 == 0: # if changes are not already in database, proceed
-                response = messagebox.askokcancel("Update Request","The following changes ({}) and ({}) will be implemented for ({}). \nProceed with the update request?".format(var_phone,var_email,var_value))
-                print(response)
-                if response:
-                    with conn:
-                        cursor = conn.cursor()
-                        cursor.execute("""UPDATE tbl_phonebook SET col_phone = '{0}',col_email = '{1}' WHERE col_fullname = '{2}'""".format(var_phone,var_email,var_value))
-                        onClear(self)
-                        conn.commit()
-                else:
-                    messagebox.showinfo("Cancel request","No changes have been made to ({}).".format(var_value))
-            else:
-                messagebox.showinfo("No changes detected","Both ({}) and ({}) \nalready exist in the database for this name. \n\nYour update request has been cancelled.".format(var_phone, var_email))
-            onClear(self)
-        conn.close
-    else:
-        messagebox.showerror("Missing information","Please select a name from the list. \nThen edit the phone or email information.")
-    onClear(self)
 
 if __name__ == "__main__":
     pass

@@ -10,8 +10,8 @@ class ParentWindow(Frame):
         Frame.__init__(self, master, *args, **kwargs)   
         # defime master frame config
         self.master = master
-        self.master.minsize(800,350) # max width / height
-        self.master.minsize(800,350) # min size
+        self.master.minsize(525,350) # max width / height
+        self.master.minsize(525,350) # min size
         self.master.title('Student Tracking') # page title label
         self.master.configure(bg='#F0F0F0') # page background color
         arg = self.master
