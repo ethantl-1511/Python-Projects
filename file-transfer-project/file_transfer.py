@@ -1,3 +1,10 @@
+# Python:   3.10.7
+# Author:   Ethan LaRocca
+# Purpose:  File Transfer project, using a GUI that will allow a user to select 
+#           a Source directory and Destination directory, clicking the Transfer 
+#           Files button will automatically transfer files from Source to 
+#           Destination if the files are less than 24 hours old.
+
 import tkinter as tk
 from tkinter import *
 import tkinter.filedialog

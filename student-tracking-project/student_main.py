@@ -1,3 +1,9 @@
+# Python:   3.10.7
+# Author:   Ethan LaRocca
+# Purpose:  Student-tracking project, using a GUI that will 
+#           allow a user to add a student's details to a 
+#           database list, view it, and delete entries.
+
 from tkinter import *
 import tkinter as tk
 
